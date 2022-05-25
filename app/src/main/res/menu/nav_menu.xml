@@ -10,4 +10,8 @@
         android:id="@+id/hasilFragment"
         android:icon="@drawable/ic_baseline_home_24"
         android:title="Hasil"/>
+    <item
+        android:id="@+id/aboutFragment"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="About"/>
 </menu>
