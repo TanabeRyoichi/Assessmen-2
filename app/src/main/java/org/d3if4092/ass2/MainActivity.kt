@@ -11,20 +11,17 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-    class MainActivity : AppCompatActivity() {
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            setContentView(R.layout.activity_main)
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
+        val navController = findNavController(R.id.fragment)
+        val appConfiguration = AppBarConfiguration(setOf(R.id.konversiFragment, R.id.hasilFragment))
+        setupActionBarWithNavController(navController, appConfiguration)
 
-            val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_nav)
-            val navController = findNavController(R.id.fragmentContainerView)
-            val  appConfiguration = AppBarConfiguration(setOf(R.id.konversiFragment, R.id.hasilFragment))
-            setupActionBarWithNavController(navController, appConfiguration)
+        bottomNavigationView.setupWithNavController(navController)
 
-            bottomNavigationView.setupWithNavController(navController)
-
-        }
     }
 
 }

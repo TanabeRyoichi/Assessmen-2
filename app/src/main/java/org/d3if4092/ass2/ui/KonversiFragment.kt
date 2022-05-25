@@ -14,8 +14,6 @@ import org.d3if4092.ass2.databinding.FragmentKonversiBinding
 
 class KonversiFragment : Fragment() {
 
-
-
     private lateinit var binding: FragmentKonversiBinding
 
     override fun onCreateView(
@@ -23,7 +21,7 @@ class KonversiFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        super.onCreate(savedInstanceState)
+        binding = FragmentKonversiBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
