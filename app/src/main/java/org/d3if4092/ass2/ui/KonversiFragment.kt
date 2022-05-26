@@ -30,7 +30,10 @@ class KonversiFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.konversiButton.setOnClickListener { konversi() }
+        db = FirebaseDatabase.getInstance().getReference("Convert")
+        binding.konversiButton.setOnClickListener {
+            konversi()
+        }
         binding.button3.setOnClickListener { reset() }
     }
 
@@ -48,13 +51,12 @@ class KonversiFragment : Fragment() {
 
         binding.jumlahTextView.text = getString(R.string.jumlah_x, hasil)
 
-        db = FirebaseDatabase.getInstance().getReference("RpKonversi")
         val inputRupiah: String = binding.inputRp.text.toString()
-        val hasilKonversi: String = getString(R.string.jumlah_x, hasil)
+        val konversiJepang : String = hasil.toString()
 
         val conId: String? = db.push().key
 
-        val con = conId?.let { Convert(it, inputRupiah) }
+        val con = conId?.let { Convert(it, inputRupiah, konversiJepang) }
 
         if (conId != null) {
             db.child(conId).setValue(con).addOnCompleteListener {
