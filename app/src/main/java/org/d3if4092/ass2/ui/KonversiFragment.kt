@@ -9,12 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import org.d3if4092.ass2.R
 import org.d3if4092.ass2.databinding.FragmentKonversiBinding
+import org.d3if4092.ass2.model.Convert
 
 class KonversiFragment : Fragment() {
 
     private lateinit var binding: FragmentKonversiBinding
+    private lateinit var db: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,16 +30,15 @@ class KonversiFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.button.setOnClickListener { konversi() }
+        binding.konversiButton.setOnClickListener { konversi() }
         binding.button3.setOnClickListener { reset() }
     }
-
 
     @SuppressLint("StringFormatMatches")
     private fun konversi() {
 
 
-        val jumlah = binding.namaInp.text.toString()
+        val jumlah = binding.inputRp.text.toString()
         if (TextUtils.isEmpty(jumlah)) {
             Toast.makeText(context, R.string.jumlah_invalid, Toast.LENGTH_LONG).show()
             return
@@ -45,15 +48,33 @@ class KonversiFragment : Fragment() {
 
         binding.jumlahTextView.text = getString(R.string.jumlah_x, hasil)
 
+        db = FirebaseDatabase.getInstance().getReference("RpKonversi")
+        val inputRupiah: String = binding.inputRp.text.toString()
+        val hasilKonversi: String = getString(R.string.jumlah_x, hasil)
+
+        val conId: String? = db.push().key
+
+        val con = conId?.let { Convert(it, inputRupiah) }
+
+        if (conId != null) {
+            db.child(conId).setValue(con).addOnCompleteListener {
+                Toast.makeText(
+                    (activity as AppCompatActivity).applicationContext,
+                    "Data berhasil disimpan",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
     }
 
     private fun reset() {
-        binding.namaInp.setText("")
+        binding.inputRp.setText("")
         binding.jumlahTextView.text = ""
 
     }
 
-    }
+}
 
 
 

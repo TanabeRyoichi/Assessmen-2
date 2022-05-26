@@ -34,7 +34,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/nama_inp"
+                android:id="@+id/inputRp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/jumlah"
@@ -66,7 +66,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button" />
+            app:layout_constraintTop_toBottomOf="@+id/konversiButton" />
 
         <TextView
             android:id="@+id/jumlahTextView"
@@ -89,7 +89,7 @@
             android:layout_marginTop="112dp"
             android:onClick="reset"
             android:text="@string/reset"
-            app:layout_constraintStart_toEndOf="@+id/button"
+            app:layout_constraintStart_toEndOf="@+id/konversiButton"
             app:layout_constraintTop_toBottomOf="@+id/nama_hint"
             tools:ignore="OnClick" />
 
@@ -101,7 +101,7 @@
             app:layout_constraintGuide_begin="20dp" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/konversiButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="104dp"
